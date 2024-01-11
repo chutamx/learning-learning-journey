@@ -8,11 +8,13 @@ app = FastAPI()
 
 openai.api_key = OPENAI_API_KEY
 
+base_url = "/api"
+
 class generations_request_body(BaseModel):
   text: str
   context: str = "txt_to_sql" 
 
-@app.post("/generations")
+@app.post(base_url + "/generations")
 async def generations(request_body: generations_request_body):
   try:
     output = prompt(request_body.text, request_body.context)
